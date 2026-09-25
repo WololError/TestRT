@@ -1,33 +1,10 @@
 #include <iostream>
-#include <string>
-#include <cstdlib>
-#include <ctime>
-
-#include "sha256.h"
-
-
-std::string genPassword(int size) {
-
-    std::string chars = "abcdefghijklmnopqrstuvwxyz" "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "0123456789";
-
-    std::string password = "";
-
-    for (int i = 0; i < size; i++) {
-        password += chars[rand() % chars.size()];
-    }
-
-    return password;
-}
-
+#include "gen_table.hpp"
 
 int main() {
-    srand(time(nullptr));
-
-    std::string password = genPassword(10);
-
-    std::string hash = sha256(password);
-
-    std::cout << "MDP  : " << password << std::endl;
-    std::cout << "SHA256 : " << hash << std::endl;
+    for (int i = 2 ; i <= 4; i++) {
+        genRT(i, 1000, 100);
+        std::cout << "RT/RT_" << i <<".csv generated." << std::endl;
+    }
     return 0;
 }
