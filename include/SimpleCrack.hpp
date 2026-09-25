@@ -4,11 +4,17 @@
 #include <string>
 #include <unordered_map>
 
+struct RainbowTable {
+    std::unordered_map<std::string, std::string> chains; // tail -> head
+    int passwordSize;
+    int chainLength;
+};
+
 // Reads a RT_<L>.csv file: first line is "passwordSize,chainLength",
-// then head,tail pairs. Returns a map tail -> head for O(1) average lookup.
-std::unordered_map<std::string, std::string> readTable(const std::string& filename, int& passwordSize, int& chainLength);
+// then head,tail pairs.
+RainbowTable readTable(const std::string& filename);
 
 // Tries to crack targetHash using the table. Returns "" if not found.
-std::string crackHash(const std::string& targetHash, const std::unordered_map<std::string, std::string>& table, int passwordSize, int chainLength);
+std::string crackHash(const std::string& targetHash, const RainbowTable& table);
 
 #endif

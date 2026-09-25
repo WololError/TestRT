@@ -13,11 +13,6 @@ std::string R(const std::string& hash_hex, int column, int length) {
     // instead of only touching the last character of the password
     value += static_cast<std::uint64_t>(column) * 0x9E3779B97F4A7C15ULL;
 
-    std::uint64_t keyspace = 1;
-    for (int i = 0; i < length; i++)
-        keyspace *= BASE;
-    value %= keyspace;
-
     std::string password(length, ' ');
     for (int i = length - 1; i >= 0; i--) {
         password[i] = ALPHABET[value % BASE];

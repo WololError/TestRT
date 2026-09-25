@@ -6,19 +6,16 @@
 #include "sha256.h"
 
 int main() {
+    RainbowTable table = readTable("RT/RT_4.csv");
+    std::cout << table.chains.size() << " chaines chargees, longueur mdp = " << table.passwordSize << ", longueur chaine = " << table.chainLength << std::endl;
 
-    int passwordSize, chainLength;
-    std::unordered_map<std::string, std::string> table = readTable("RT/RT_4.csv", passwordSize, chainLength);
-    std::cout << table.size() << " chaines chargees, longueur mdp = " << passwordSize
-               << ", longueur chaine = " << chainLength << std::endl;
-
-    std::string targetPassword = genPassword(passwordSize);
+    std::string targetPassword = genPassword(table.passwordSize);
     std::string targetHash = sha256(targetPassword);
 
     std::cout << "mot de passe cache : " << targetPassword << std::endl;
     std::cout << "hash a casser      : " << targetHash << std::endl;
 
-    std::string result = crackHash(targetHash, table, passwordSize, chainLength);
+    std::string result = crackHash(targetHash, table);
 
     if (!result.empty())
         std::cout << "mot de passe retrouve : " << result << std::endl;
