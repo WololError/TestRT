@@ -24,7 +24,7 @@ void genRT(int passwordSize, int numberOfChains, int chainLength) {
     if (!file.is_open())
         throw std::runtime_error("Could not open " + filename);
 
-    file << passwordSize << "\n";
+    file << passwordSize << "," << chainLength << "\n";
 
     for (int i = 0; i < numberOfChains; i++) {
         std::string head = genPassword(passwordSize);

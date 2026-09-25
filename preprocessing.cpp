@@ -3,7 +3,7 @@
 
 int main() {
     for (int i = 2 ; i <= 4; i++) {
-        genRT(i, 1000, 100);
+        genRT(i, 1000, 1000);
         std::cout << "RT/RT_" << i <<".csv generated." << std::endl;
     }
     return 0;
